@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfjo8x606vcqy"]
+
+[ext_resource type="Script" path="res://map.gd" id="1_iyagy"]
+[ext_resource type="PackedScene" uid="uid://c36doyhufgwt" path="res://ship.tscn" id="1_nqr6e"]
+[ext_resource type="PackedScene" uid="uid://83q1ikd3tkcg" path="res://alien_1.tscn" id="3_5mrdr"]
+[ext_resource type="Script" path="res://alien_manager.gd" id="3_h3x6b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7atbg"]
+size = Vector2(14, 645)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv2s6"]
+size = Vector2(1165, 20)
+
+[node name="Map" type="Node2D"]
+script = ExtResource("1_iyagy")
+
+[node name="Ship" parent="." instance=ExtResource("1_nqr6e")]
+unique_name_in_owner = true
+position = Vector2(514, 533)
+
+[node name="LeftWall" type="RigidBody2D" parent="." groups=["boundry"]]
+position = Vector2(1154, 324.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(1, -4.5)
+shape = SubResource("RectangleShape2D_7atbg")
+
+[node name="RightWall" type="RigidBody2D" parent="."]
+position = Vector2(1154, 324.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" groups=["boundry"]]
+position = Vector2(-1149, -4.5)
+shape = SubResource("RectangleShape2D_7atbg")
+
+[node name="Roof" type="Area2D" parent="." groups=["boundry"]]
+position = Vector2(44, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roof" groups=["boundry"]]
+position = Vector2(537.5, -2)
+shape = SubResource("RectangleShape2D_rv2s6")
+
+[node name="Alien Manager" type="Node" parent="."]
+script = ExtResource("3_h3x6b")
+
+[node name="Alien1" parent="Alien Manager" instance=ExtResource("3_5mrdr")]
+position = Vector2(989, 26)
+
+[node name="Alien2" parent="Alien Manager" instance=ExtResource("3_5mrdr")]
+position = Vector2(878, 26)

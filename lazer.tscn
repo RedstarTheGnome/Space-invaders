@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn4aig0nspvqi"]
+
+[ext_resource type="Script" path="res://Alien_lazer.gd" id="1_eie71"]
+[ext_resource type="Texture2D" uid="uid://c0koio74nyave" path="res://Assets/Images/lazer.png" id="1_x4umx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldhl6"]
+size = Vector2(18, 42)
+
+[node name="lazer" type="Node2D"]
+
+[node name="Area2d" type="Area2D" parent="." groups=["lazers"]]
+script = ExtResource("1_eie71")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2d"]
+position = Vector2(9, 21)
+shape = SubResource("RectangleShape2D_ldhl6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2d"]
+position = Vector2(9, 21)
+scale = Vector2(0.125, 0.122024)
+texture = ExtResource("1_x4umx")
+
+[connection signal="area_shape_entered" from="Area2d" to="Area2d" method="_on_area_shape_entered"]
